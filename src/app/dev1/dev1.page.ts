@@ -26,7 +26,7 @@ export class Dev1Page {
             text: 'Power Consumed by Device 1'
         },
         pan: {
-            enabled: false,
+            enabled: true,
             mode: 'xy'
         },
         zoom: {
@@ -41,11 +41,11 @@ export class Dev1Page {
         }
     ];
     chartType = 'line';
-    showLegend = false;
+    showLegend = true;
 
     // For search
 
-    timeframe: any;
+    timeframe = '30';
 
     constructor(private http: HttpClient) {
     }
@@ -53,17 +53,23 @@ export class Dev1Page {
     getData() {
         var query = String(this.timeframe);
         var uri = 'https://thesis2020.000webhostapp.com/api/specificTime.php?Device=1&Time=' + encodeURIComponent(query);
-        this.http.get(uri, { responseType: 'json' }).subscribe(
-            data => {
-                this.chartData = data as any[];	 // FILL THE CHART ARRAY WITH DATA.
-                console.log(data);
-                let clone = JSON.parse(JSON.stringify(this.chartData));
-                clone[0].data = data;
-                this.chartData = clone;
+        this.http.get(uri).subscribe(
+            result => {
+                //this.chartData = data as any[];	 // FILL THE CHART ARRAY WITH DATA.
+                console.log('res: ',result);
+                let powerdata = result;
+
+                this.chartLabels = [];
+                this.chartData[0].data = [];
+
+                for (let entry of powerdata) {
+                    this.chartLabels.push(entry.Time);
+                    this.chartData[0].data.push(entry.Current);
+                }
             },
 
         );
-
+        console.log('data: ',this.chartData);
     }
 
 
@@ -71,13 +77,21 @@ export class Dev1Page {
         var query = String(this.timeframe);
         var uri = 'https://thesis2020.000webhostapp.com/api/specificTime.php?Device=1&Time=' + encodeURIComponent(query);
         this.http.get(uri, { responseType: 'json' }).subscribe(
-            data => {
-                this.chartData = data as any[];	 // FILL THE CHART ARRAY WITH DATA.
-                console.log(data);
+            result => {
+                //this.chartData = data as any[];	 // FILL THE CHART ARRAY WITH DATA.
+                console.log('res: ', result);
+                let powerdata = result;
+
+                this.chartLabels = [];
+                this.chartData[0].data = [];
+
+                for (let entry of powerdata) {
+                    this.chartLabels.push(entry.Time);
+                    this.chartData[0].data.push(parseInt(entry['Current']));
+                }
             },
-            
         );
-        
+        console.log('data: ', this.chartData);  
     }
 
 
