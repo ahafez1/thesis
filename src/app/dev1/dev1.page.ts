@@ -76,7 +76,7 @@ export class Dev1Page {
     ngOnInit() {
         var query = String(this.timeframe);
         var uri = 'https://thesis2020.000webhostapp.com/api/specificTime.php?Device=1&Time=' + encodeURIComponent(query);
-        this.http.get(uri, { responseType: 'json' }).subscribe(
+        this.http.get(uri).subscribe(
             result => {
                 //this.chartData = data as any[];	 // FILL THE CHART ARRAY WITH DATA.
                 console.log('res: ', result);
@@ -87,7 +87,7 @@ export class Dev1Page {
 
                 for (let entry of powerdata) {
                     this.chartLabels.push(entry.Time);
-                    this.chartData[0].data.push(parseInt(entry['Current']));
+                    this.chartData[0].data.push(parseInt(entry.Current));
                 }
             },
         );
