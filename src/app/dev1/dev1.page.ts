@@ -7,9 +7,9 @@ import { Observable } from 'rxjs';
 import { NavController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-dev1',
-  templateUrl: './dev1.page.html',
-  styleUrls: ['./dev1.page.scss'],
+    selector: 'app-dev1',
+    templateUrl: './dev1.page.html',
+    styleUrls: ['./dev1.page.scss'],
 })
 export class Dev1Page {
 
@@ -56,7 +56,7 @@ export class Dev1Page {
         this.http.get(uri).subscribe(
             result => {
                 //this.chartData = data as any[];	 // FILL THE CHART ARRAY WITH DATA.
-                console.log('res: ',result);
+                console.log('res: ', result);
                 let powerdata = result;
 
                 this.chartLabels = [];
@@ -69,7 +69,7 @@ export class Dev1Page {
             },
 
         );
-        console.log('data: ',this.chartData);
+        console.log('data: ', this.chartData);
     }
 
 
@@ -91,7 +91,7 @@ export class Dev1Page {
                 }
             },
         );
-        console.log('data: ', this.chartData);  
+        console.log('data: ', this.chartData);
     }
 
 
