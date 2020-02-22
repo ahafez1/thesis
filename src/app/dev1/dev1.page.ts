@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { AlertController } from '@ionic/angular';
 import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
+import { Observable } from 'rxjs';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-dev1',
@@ -15,6 +17,8 @@ export class Dev1Page {
     chartLabels: Label[];
 
     // Options
+    //chartLabels = [ 'time', 'others'];
+
     chartOptions = {
         responsive: true,
         title: {
@@ -32,7 +36,7 @@ export class Dev1Page {
     };
     chartColors: Color[] = [
         {
-            borderColor: '#000000',
+            borderColor: 'Black',
             backgroundColor: 'Magenta'
         }
     ];
@@ -40,19 +44,42 @@ export class Dev1Page {
     showLegend = false;
 
     // For search
-    stock = '';
+
     timeframe: any;
 
     constructor(private http: HttpClient) {
     }
 
     getData() {
-        this.http.get(`https://thesis2020.000webhostapp.com/api/specificTime.php?Device=1&Time=1`).subscribe(
-            res => {
-                this.chartData;
-                console.log(this.chartData[0])
-        });
+        var query = String(this.timeframe);
+        var uri = 'https://thesis2020.000webhostapp.com/api/specificTime.php?Device=1&Time=' + encodeURIComponent(query);
+        this.http.get(uri, { responseType: 'json' }).subscribe(
+            data => {
+                this.chartData = data as any[];	 // FILL THE CHART ARRAY WITH DATA.
+                console.log(data);
+                let clone = JSON.parse(JSON.stringify(this.chartData));
+                clone[0].data = data;
+                this.chartData = clone;
+            },
+
+        );
+
     }
+
+
+    ngOnInit() {
+        var query = String(this.timeframe);
+        var uri = 'https://thesis2020.000webhostapp.com/api/specificTime.php?Device=1&Time=' + encodeURIComponent(query);
+        this.http.get(uri, { responseType: 'json' }).subscribe(
+            data => {
+                this.chartData = data as any[];	 // FILL THE CHART ARRAY WITH DATA.
+                console.log(data);
+            },
+            
+        );
+        
+    }
+
 
     typeChanged(e) {
         const on = e.detail.checked;

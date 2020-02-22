@@ -14,5 +14,7 @@ export class Tab2Page {
         this.router.navigate(['dev1']);
     }
 
-
+    GoToThirdPage() {
+        this.router.navigate(['dev2']);
+    }
 }

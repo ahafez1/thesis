@@ -13,6 +13,29 @@ import { Color, Label } from 'ng2-charts';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+    chartOptions = {
+        responsive: true    // THIS WILL MAKE THE CHART RESPONSIVE (VISIBLE IN ANY DEVICE).
+    }
+
+    labels = ['JAN', 'FEB'];
+
+    // STATIC DATA FOR THE CHART IN JSON FORMAT.
+
+
+    // CHART COLOR.
+    colors = [
+        { // 1st Year.
+            backgroundColor: 'rgba(77,83,96,0.2)'
+        },
+        { // 2nd Year.
+            backgroundColor: 'rgba(30, 169, 224, 0.8)'
+        }
+    ]
+
+    // CHART CLICK EVENT.
+    onChartClick(event) {
+        console.log(event);
+    }
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,

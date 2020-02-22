@@ -10,6 +10,10 @@ const routes: Routes = [
     path: 'dev1',
     loadChildren: () => import('./dev1/dev1.module').then( m => m.Dev1PageModule)
   },
+  {
+    path: 'dev2',
+    loadChildren: () => import('./dev2/dev2.module').then( m => m.Dev2PageModule)
+  },
  
 ];
 @NgModule({

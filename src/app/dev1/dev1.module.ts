@@ -16,7 +16,8 @@ import { ChartsModule } from 'ng2-charts';
         FormsModule,
         IonicModule,
         Dev1PageRoutingModule,
-        ChartsModule
+        ChartsModule,
+
     ],
     declarations: [Dev1Page]
 })

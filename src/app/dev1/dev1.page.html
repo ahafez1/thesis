@@ -9,46 +9,35 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-    <ion-item>
-        <ion-input type="text" [(ngModel)]="stock" placeholder="1,7,30..."></ion-input>
-        <ion-button slot="end" expand="full" (click)="getData()" [disabled]="timeframe == '1'">
-            <ion-icon slot="start" name="search"></ion-icon>
-            Search
-        </ion-button>
-    </ion-item>
 
-    <canvas baseChart
-            [datasets]="chartData"
-            [labels]="chartLabels"
-            [options]="chartOptions"
-            [colors]="chartColors"
-            [legend]="showLegend"
-            [chartType]="chartType">
-    </canvas>
+<ion-content>
 
     <ion-card>
         <ion-card-header>
             <ion-card-title>Settings</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-            <ion-item>
-                <ion-label>Line chart?</ion-label>
-                <ion-toggle (ionChange)="typeChanged($event)" checked></ion-toggle>
-            </ion-item>
-
             <ion-list>
-
                 <ion-item>
                     <ion-label>Timeframe</ion-label>
-                    <ion-select [(ngModel)]="timeframe" value="1" okText="Okay" cancelText="Dismiss">
-                        <ion-select-option value="1">1 Day</ion-select-option>
+                    <ion-select [(ngModel)]="timeframe" value="30" okText="Okay" cancelText="Dismiss">
+                        <ion-select-option value="330">1 Day</ion-select-option>
                         <ion-select-option value="7">7 Days</ion-select-option>
                         <ion-select-option value="30">1 Month</ion-select-option>
                     </ion-select>
                 </ion-item>
-
             </ion-list>
+            <ion-button slot="end" (click)="getData()">
+                <ion-icon slot="start" name="refresh"></ion-icon>
+                Refresh
+            </ion-button>
         </ion-card-content>
     </ion-card>
+
+    <canvas baseChart
+            [datasets]="chartData"
+            [labels]="chartLabels"
+            [chartType]="'line'">
+    </canvas>
+
 </ion-content>
