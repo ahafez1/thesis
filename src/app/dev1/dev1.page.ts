@@ -57,12 +57,12 @@ export class Dev1Page {
             result => {
                 //this.chartData = data as any[];	 // FILL THE CHART ARRAY WITH DATA.
                 console.log('res: ', result);
-                let powerdata = result;
+                const powerdata = result;
 
                 this.chartLabels = [];
                 this.chartData[0].data = [];
 
-                for (let entry of powerdata) {
+                for (const entry of powerdata[Symbol.iterator]()) {
                     this.chartLabels.push(entry.Time);
                     this.chartData[0].data.push(entry.Current);
                 }
@@ -80,18 +80,19 @@ export class Dev1Page {
             result => {
                 //this.chartData = data as any[];	 // FILL THE CHART ARRAY WITH DATA.
                 console.log('res: ', result);
-                let powerdata = result;
+                const powerdata = result;
 
                 this.chartLabels = [];
                 this.chartData[0].data = [];
 
-                for (let entry of powerdata) {
+                for (const entry of powerdata[Symbol.iterator]()) {
                     this.chartLabels.push(entry.Time);
                     this.chartData[0].data.push(parseInt(entry.Current));
                 }
             },
         );
         console.log('data: ', this.chartData);
+        //this.getData();
     }
 
 

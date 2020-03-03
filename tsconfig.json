@@ -10,13 +10,18 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2015",
+    "target": "es6",
     "typeRoots": [
       "node_modules/@types"
     ],
+    "downlevelIteration": true,
     "lib": [
       "es2018",
-      "dom"
+      "dom",
+      "ES5",
+      "ES6",
+      "DOM.Iterable"
+
     ]
   },
   "angularCompilerOptions": {
