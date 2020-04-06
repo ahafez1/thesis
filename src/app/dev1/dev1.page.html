@@ -10,6 +10,17 @@
 </ion-header>
 
 <ion-content>
+    <ion-card>
+        <ion-button expand="half" ion-button (click)="openUrll()">
+            <ion-icon color="success" slot="start" name="power"></ion-icon>
+            ON
+        </ion-button>
+        <ion-button expand="half" ion-button (click)="openUrll()">
+            <ion-icon color="danger" slot="start" name="power"></ion-icon>
+            OFF
+        </ion-button>
+    </ion-card>
+
     <ion-card class="ion-padding">
         <canvas baseChart
                 [datasets]="chartData"
@@ -40,7 +51,7 @@
     </ion-card>
     <ion-card class="ion-padding">
         <ion-card-content>
-           <h1>${{money | number}}</h1>
+            <h1>Cost: ${{money1 | number}}</h1>
         </ion-card-content>
     </ion-card>
 </ion-content>

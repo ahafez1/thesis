@@ -15,7 +15,7 @@ export class Dev1Page implements OnInit{
 
     chartData: ChartDataSets[] = [{ data: [], label: 'Power Consumption' }];
     chartLabels: Label[];
-    public money: string;
+    public money1: string;
 
     chartOptions = {
         responsive: true,
@@ -35,26 +35,28 @@ export class Dev1Page implements OnInit{
     chartColors: Color[] = [
         {
             borderColor: 'Black',
-            backgroundColor: 'Magenta'
+            backgroundColor: '#16FF00'
         }
     ];
     chartType = 'line';
     showLegend = true;
 
-    timeframe = '1';
+    timeframe = '30';
 
     constructor(private http: HttpClient) {
     }
+
+    openUrl() { window.open('https://thesis2020.000webhostapp.com/api/device1off.php', '_system'); }
+    openUrll() { window.open('https://thesis2020.000webhostapp.com/api/device1on.php', '_system'); }
 
     getData() {
         var query = String(this.timeframe);
         var uri = 'https://thesis2020.000webhostapp.com/api/specificTime.php?Device=1&Time=' + encodeURIComponent(query);
         this.http.get(uri).subscribe(
             result => {
-                //this.chartData = data as any[];	 // FILL THE CHART ARRAY WITH DATA.
-                console.log('res: ', result);
+                //console.log('res: ', result);
                 const powerdata = result;
-                let money = '0';
+                let money1 = '0';
 
                 this.chartLabels = [];
                 this.chartData[0].data = [];
@@ -62,14 +64,14 @@ export class Dev1Page implements OnInit{
                 for (const entry of powerdata[Symbol.iterator]()) {
                     this.chartLabels.push(entry.Time);
                     this.chartData[0].data.push(entry.Current);
-                    money = String(parseInt(money) + parseInt(entry.Current));
+                    money1 = String(parseInt(money1) + parseInt(entry.Current));
                 }
-                console.log('money: ', money);
-                this.money = money;
+                //console.log('money: ', money1);
+                this.money1 = String(parseInt(money1) * 1.5);
             },
 
         );
-        console.log('data: ', this.chartData);
+        //console.log('data: ', this.chartData);
     }
 
     ngOnInit() {
